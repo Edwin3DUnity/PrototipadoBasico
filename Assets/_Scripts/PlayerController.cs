@@ -1,54 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     private Animator _animator;
 
-    private const string MOVE_HANDS = "Move Hands";
-    private bool movingHands;
+    private const string MOVE_HAND = "Move Hand";
+    private bool MovingHang;
 
-
-    private const string MOVE_X = "Move_X";
-    private const string MOVE_Y = "Move_Y";
+    private const string HORIZONTAL = "Horizontal";
+    private const string VERTICAL = "Vertical";
 
     private bool isMoving;
-    private const string IS_MOVING = "isMoving";
+    private const string IS_MOVING = "Is Moving";
 
 
-
-    private float Move_X;
-    private float Move_Y;
+    private float horizontal;
+    private float vertical;
     
     // Start is called before the first frame update
     void Start()
     {
+
+
         _animator = GetComponent<Animator>();
-        _animator.SetBool(MOVE_HANDS, movingHands);
+        _animator.SetBool(MOVE_HAND, MovingHang);
         
-        _animator.SetBool(IS_MOVING, isMoving);
-        
-        _animator.SetFloat(MOVE_X, Move_X);
-        _animator.SetFloat(MOVE_Y, Move_Y);
-        
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move_X = Input.GetAxis("Horizontal");
-        Move_Y = Input.GetAxis("Vertical");
-        
-        
-        if (Mathf.Sqrt(Move_X * Move_X + Move_Y * Move_Y) > 0.01)
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
+
+
+        if (Mathf.Sqrt(horizontal * horizontal + vertical * vertical) > 0.01)
         {
-          
             _animator.SetBool(IS_MOVING, isMoving = true);
-            _animator.SetFloat(MOVE_X, Move_X);
-            _animator.SetFloat(MOVE_Y, Move_Y);
+            
+            _animator.SetFloat(HORIZONTAL, horizontal);
+            _animator.SetFloat(VERTICAL, vertical);
+            
             
         }
         else
@@ -57,15 +53,17 @@ public class PlayerController : MonoBehaviour
         }
         
         
-
+        
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            movingHands = !movingHands;
-            
-            _animator.SetBool(MOVE_HANDS, movingHands);
-
+            MovingHang = !MovingHang;
+            _animator.SetBool(MOVE_HAND, MovingHang);
 
         }
+        
+        
+        
         
     }
 }
