@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Animator _animator;
-    
-    private const string MOVE_HANDS = 
+
+    private const string MOVE_HANDS = "Move Hands";
+    private bool isMovingHangs;
     
     
     // Start is called before the first frame update
@@ -14,6 +15,8 @@ public class PlayerController : MonoBehaviour
     {
 
         _animator = GetComponent<Animator>();
+        _animator.SetBool(MOVE_HANDS, isMovingHangs);
+        
 
     }
 
@@ -21,5 +24,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         
+        
+        
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            isMovingHangs = !isMovingHangs;
+            _animator.SetBool(MOVE_HANDS, isMovingHangs);
+        }
     }
 }
