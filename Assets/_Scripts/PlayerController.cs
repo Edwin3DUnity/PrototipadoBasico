@@ -5,45 +5,51 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+
     private Animator _animator;
 
-    private const string MOVE_HAND = "Move Hand";
-    private bool MovingHang;
+    private bool isMovingHang;
+    private const string MOVE_HAND = "Moving Hand";
 
-    private const string HORIZONTAL = "Horizontal";
-    private const string VERTICAL = "Vertical";
 
+    private const string IS_MOVING = "IsMoving";
     private bool isMoving;
-    private const string IS_MOVING = "Is Moving";
 
 
-    private float horizontal;
-    private float vertical;
+    private float moveX;
+    private float moveZ;
+
+    private const string MOVE_X = "Move_X";
+    private const string MOVE_Z = "Move_Z";
+    
     
     // Start is called before the first frame update
     void Start()
     {
 
-
         _animator = GetComponent<Animator>();
-        _animator.SetBool(MOVE_HAND, MovingHang);
+        _animator.SetBool(MOVE_HAND, isMovingHang);
+        _animator.SetBool(IS_MOVING, isMoving);
         
-
+        _animator.SetFloat(MOVE_X, moveX);
+        _animator.SetFloat(MOVE_Z, moveZ);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+
+        moveX = Input.GetAxis("Horizontal");
+        moveZ = Input.GetAxis("Vertical");
 
 
-        if (Mathf.Sqrt(horizontal * horizontal + vertical * vertical) > 0.01)
+
+        if (Mathf.Sqrt(moveX * moveX + moveZ * moveZ) > 0.01)
         {
-            _animator.SetBool(IS_MOVING, isMoving = true);
-            
-            _animator.SetFloat(HORIZONTAL, horizontal);
-            _animator.SetFloat(VERTICAL, vertical);
+            _animator.SetBool(IS_MOVING,isMoving = true);
+            _animator.SetFloat(MOVE_X, moveX);
+            _animator.SetFloat(MOVE_Z, moveZ);
             
             
         }
@@ -55,15 +61,15 @@ public class PlayerController : MonoBehaviour
         
         
         
+        
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            MovingHang = !MovingHang;
-            _animator.SetBool(MOVE_HAND, MovingHang);
+            isMovingHang = !isMovingHang;
+            _animator.SetBool(MOVE_HAND, isMovingHang);
+
 
         }
-        
-        
-        
         
     }
 }
