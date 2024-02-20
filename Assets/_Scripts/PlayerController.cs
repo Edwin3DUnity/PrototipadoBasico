@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
 
     private const string IS_MOVEMENT = "isMovement";
-    private bool isMovement;
+   [FormerlySerializedAs("isMovement")] [SerializeField] private bool isMovingHand;
 
     private const string HORIZONTAL = "Horizontal";
     private float horizontal;
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _animator.SetBool(MOVING_HAND, isMoving);
         
-        _animator.SetBool(IS_MOVEMENT, isMovement);
+        _animator.SetBool(IS_MOVEMENT, isMovingHand);
         
         _animator.SetFloat(HORIZONTAL, horizontal);
         _animator.SetFloat(VERTICAL, vertical);
@@ -47,7 +48,20 @@ public class PlayerController : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-        
+
+        if (Mathf.Sqrt(horizontal * horizontal + vertical * vertical) >= 0.01)
+        {
+            _animator.SetBool( IS_MOVEMENT, isMovingHand = true );
+            _animator.SetFloat(HORIZONTAL, horizontal);
+            _animator.SetFloat(VERTICAL, vertical);
+            
+            _animator.SetBool(IS_MOVEMENT, isMoving = true);
+            
+        }
+        else
+        {
+            _animator.SetBool(IS_MOVEMENT, isMoving = false);
+        }
         
         
     }
