@@ -5,59 +5,58 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-
     private Animator _animator;
-
-    private bool isMovingHang;
-    private const string MOVE_HAND = "Moving Hand";
-
-
-    private const string IS_MOVING = "IsMoving";
-    private bool isMoving;
+    [SerializeField] private bool isMoving;
+    private const string MOVING_HAND = "isMovingHand";
 
 
-    private float moveX;
-    private float moveZ;
+    private const string IS_MOVEMENT = "isMovement";
+    private bool isMovement;
 
-    private const string MOVE_X = "Move_X";
-    private const string MOVE_Z = "Move_Z";
+    private const string HORIZONTAL = "Horizontal";
+    private float horizontal;
+
+    private const string VERTICAL = "Vertical";
+    private float vertical;
+    
     
     
     // Start is called before the first frame update
     void Start()
     {
-
         _animator = GetComponent<Animator>();
-        _animator.SetBool(MOVE_HAND, isMovingHang);
-        _animator.SetBool(IS_MOVING, isMoving);
+        _animator.SetBool(MOVING_HAND, isMoving);
         
-        _animator.SetFloat(MOVE_X, moveX);
-        _animator.SetFloat(MOVE_Z, moveZ);
+        _animator.SetBool(IS_MOVEMENT, isMovement);
+        
+        _animator.SetFloat(HORIZONTAL, horizontal);
+        _animator.SetFloat(VERTICAL, vertical);
+        
+        
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        MovingHand();
+        Movement();
+    }
 
-        moveX = Input.GetAxis("Horizontal");
-        moveZ = Input.GetAxis("Vertical");
-
-
-
-        if (Mathf.Sqrt(moveX * moveX + moveZ * moveZ) > 0.01)
-        {
-            _animator.SetBool(IS_MOVING,isMoving = true);
-            _animator.SetFloat(MOVE_X, moveX);
-            _animator.SetFloat(MOVE_Z, moveZ);
-            
-            
-        }
-        else
-        {
-            _animator.SetBool(IS_MOVING, isMoving = false);
-        }
+    private void Movement()
+    {
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
         
+        
+        
+    }
+    
+    
+    private void MovingHand()
+    {
+
+      
         
         
         
@@ -65,10 +64,9 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            isMovingHang = !isMovingHang;
-            _animator.SetBool(MOVE_HAND, isMovingHang);
-
-
+            isMoving = !isMoving;
+            _animator.SetBool(MOVING_HAND, isMoving);
+            
         }
         
     }
