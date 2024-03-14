@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 432346824}
   - component: {fileID: 432346823}
   - component: {fileID: 432346828}
-  - component: {fileID: 432346827}
+  - component: {fileID: 432346829}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -306,23 +306,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &432346827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 432346822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7c713e1d87b60a43bd1c491be247add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 25
-  force: 10
-  rotation: 180
-  limite: 18
-  usePhysicsEngine: 0
 --- !u!54 &432346828
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -339,6 +322,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &432346829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432346822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688efbbc6bdb1564f8c13c5510d81c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedMove: 8
+  rotationGrade: 180
+  force: 36.5
+  torqueForce: 22.1
+  useForce: 0
+  limite: 14
 --- !u!1 &1003043711
 GameObject:
   m_ObjectHideFlags: 0
